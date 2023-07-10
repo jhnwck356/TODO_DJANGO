@@ -1,0 +1,27 @@
+{% extends 'base/main.html' %} {% block content %}
+
+<div class="header-bar">
+    <a href="{% url 'tasks' %}">&#8592; Back</a>
+</div>
+
+
+<div class="card-body">
+    <form method="POST" action="">
+        {% csrf_token %}
+        <h1>Task: {{task}}</h1>
+        <p><span style="font-weight: bold;" >Description:</span> {{task.description}}</p>
+        <p><span style="font-weight: bold;" >Status:</span> {{task.status}}</p>
+        <p><span style="font-weight: bold;" >Targeted completion date:</span> {{task.targeted_completion_date}}</p>
+        <p><span style="font-weight: bold;" >Remaining day untill completion:</span> {{ task.remaining_days_until_completion }}</p>
+        <small>Created: {{task.created_at}}</small> <br>
+        <small>Updated: {{task.updated_at}}</small>
+    </form>
+    <div class="task-controls">
+        <br>
+        <a class='update-link' href="{% url 'task-update' task.id %}">&#8686;</a>
+        <a class="delete-link" href="{% url 'task-delete' task.id %}">&#215;</a>
+        <!-- <span class="handle" >Update</span> -->
+    </div>
+</div>
+
+{% endblock content %}
